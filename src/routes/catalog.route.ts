@@ -17,6 +17,14 @@ import {
     unlinkCategoryFromCategory
 } from '../controllers/category.controller';
 
+import {
+    addProductToCart,
+    removeProductFromCart,
+    updateProductQuantityInCart,
+    getCartTotal,
+    createCart
+} from '../controllers/cart.controller';
+
 export const router = express.Router();
 
 // Product Routes
@@ -34,4 +42,11 @@ router.put('/categories/:id', updateCategory);
 router.delete('/categories/:id', deleteCategory); 
 router.post('/categories/:parentCategoryId/subcategories/:subcategoryId', linkCategoryToCategory);
 router.delete('/categories/:parentCategoryId/subcategories/:subcategoryId', unlinkCategoryFromCategory);
+
+//Cart Routes
+router.get('/allCarts',createCart)
+router.post('/cart', addProductToCart);
+router.delete('/cart/:userId/products/:productId', removeProductFromCart);
+router.put('/cart/:userId/products/:productId', updateProductQuantityInCart);
+router.get('/cart/:userId/total', getCartTotal);
 
